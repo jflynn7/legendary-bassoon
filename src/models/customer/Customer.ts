@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { Product } from '../merchant/Product';
+import { Comment } from './Comment';
 
 @Entity()
 export class Customer {
@@ -8,7 +9,16 @@ export class Customer {
     id: number;
 
     @Column()
+    username: string;
+
+    @Column()
+    password: string;
+
+    @Column()
     name: string;
+
+    @OneToMany(type => Comment, comment => comment.customer, { cascadeInsert : true})
+    comments: Comment[];
 
     @ManyToMany(type => Product, {
         cascadeInsert: true,
@@ -16,4 +26,5 @@ export class Customer {
     })
     @JoinTable()
     favourites: Product[];
+
 }

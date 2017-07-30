@@ -2,8 +2,11 @@ import { Product } from '../models/merchant/Product';
 import { Merchant } from '../models/merchant/Merchant';
 import {ConnectionOptions, getConnectionManager} from 'typeorm';
 import { createConnection } from 'typeorm';
-import {Supplier} from '../models/merchant/Supplier';
-import {Customer} from '../models/customer/Customer';
+import { Supplier } from '../models/merchant/Supplier';
+import { Customer } from '../models/customer/Customer';
+import { Comment } from '../models/customer/Comment';
+import { OrderedProduct } from '../models/ordering/OrderedProduct';
+import { CustomerOrder } from '../models/ordering/CustomerOrder';
 
 module.exports = {
     getDatabaseConfig() {
@@ -20,7 +23,7 @@ module.exports = {
             logging: {
                 logQueries: true,
             },
-            entities: [Merchant, Product, Supplier, Customer],
+            entities: [Merchant, Product, Supplier, Customer, Comment, CustomerOrder, OrderedProduct],
         };
 
         return connectionOptions;

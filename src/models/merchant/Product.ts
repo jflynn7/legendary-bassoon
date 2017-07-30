@@ -1,5 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+    Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany
+} from 'typeorm';
 import { Merchant } from './Merchant';
+import { Comment } from '../customer/Comment';
+import { OrderedProduct } from '../ordering/OrderedProduct';
 
 @Entity()
 export class Product {
@@ -16,11 +20,8 @@ export class Product {
     @Column()
     price: number;
 
-    @Column()
+    @Column({ default: 0 })
     views: number;
-
-    @Column()
-    isPublished: boolean;
 
     @ManyToOne(type => Merchant, merchant => merchant.products, {
         cascadeInsert: true,
@@ -28,4 +29,12 @@ export class Product {
         onDelete: 'SET NULL'
     })
     merchant: Merchant|null;
+
+    @OneToMany(type => Comment, comment => comment.product, { cascadeInsert : true})
+    comments: Comment[];
+
+    @ManyToOne(type => OrderedProduct, orderedProduct => orderedProduct.product, {
+        cascadeInsert: true
+    })
+    orderedProduct: OrderedProduct;
 }
