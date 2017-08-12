@@ -6,7 +6,7 @@ import { Supplier } from '../models/merchant/Supplier';
 import { Customer } from '../models/customer/Customer';
 import { Comment } from '../models/customer/Comment';
 import { OrderedProduct } from '../models/ordering/OrderedProduct';
-import { CustomerOrder } from '../models/ordering/CustomerOrder';
+import { Order } from '../models/ordering/Order';
 
 module.exports = {
     getDatabaseConfig() {
@@ -23,7 +23,7 @@ module.exports = {
             logging: {
                 logQueries: true,
             },
-            entities: [Merchant, Product, Supplier, Customer, Comment, CustomerOrder, OrderedProduct],
+            entities: [Merchant, Product, Supplier, Customer, Comment, Order, OrderedProduct],
         };
 
         return connectionOptions;

@@ -1,9 +1,10 @@
 import {
     Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinTable, ManyToMany, UpdateDateColumn,
-    CreateDateColumn
+    CreateDateColumn, ManyToOne
 } from 'typeorm';
 import {Product} from './Product';
 import {Supplier} from './Supplier';
+import {Order} from '../ordering/Order';
 
 @Entity()
 export class Merchant {

@@ -2,7 +2,7 @@ import {
     Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne, JoinColumn
 } from 'typeorm';
 import { Product } from '../merchant/Product';
-import { CustomerOrder } from './CustomerOrder';
+import { Order } from './Order';
 
 @Entity()
 export class OrderedProduct {
@@ -27,7 +27,7 @@ export class OrderedProduct {
     @JoinColumn()
     product: Product|null;
 
-    @ManyToOne(type => CustomerOrder, order => order.orderedProducts)
-    order: CustomerOrder;
+    @ManyToOne(type => Order, order => order.orderedProducts)
+    order: Order;
 
 }

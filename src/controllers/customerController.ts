@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Customer } from '../models/customer/Customer';
-import { CustomerOrder } from '../models/ordering/CustomerOrder';
+import { Order } from '../models/ordering/Order';
 
 const db = require('../database-actions/customerActions');
 const dbUtil = require('../util/dbUtil');
@@ -50,8 +50,8 @@ export let addFavourites = (req: Request, res: Response) => {
 
 export let createOrder = (req: Request, res: Response) => {
     dbUtil.getConnection().then((connection: any) => {
-        db.createOrder(connection, req.params.customerId, req.body.orders)
-            .then((order: CustomerOrder) => {
+        db.createOrder(connection, req.params.customerId, req.body)
+            .then((order: Order) => {
                 res.json(order);
             })
             .catch((err: any) => {
@@ -63,7 +63,7 @@ export let createOrder = (req: Request, res: Response) => {
 export let findOrder = (req: Request, res: Response) => {
     dbUtil.getConnection().then((connection: any) => {
         db.findOrder(connection, req.params.orderId)
-            .then((order: CustomerOrder) => {
+            .then((order: Order) => {
                 res.json(order);
             })
             .catch((err: any) => {

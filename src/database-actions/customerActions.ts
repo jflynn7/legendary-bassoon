@@ -1,9 +1,10 @@
 import { Customer } from '../models/customer/Customer';
 import { Product } from '../models/merchant/Product';
-import { CustomerOrder } from '../models/ordering/CustomerOrder';
+import { Order } from '../models/ordering/Order';
 import { OrderedProduct } from '../models/ordering/OrderedProduct';
 import { Merchant } from '../models/merchant/Merchant';
-import {error} from 'util';
+import {CompositeOrder, OrderItem} from '../models/transient/orderingTransients';
+
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -65,8 +66,8 @@ module.exports = {
     },
 
     async findOrder(connection: any, orderId: number) {
-        const orderRepo = connection.getRepository(CustomerOrder);
-        let orderInstance: CustomerOrder;
+        const orderRepo = connection.getRepository(Order);
+        let orderInstance: Order;
 
         await orderRepo.createQueryBuilder('order')
             .leftJoinAndSelect('order.orderedProducts', 'orderedProducts')
@@ -74,33 +75,42 @@ module.exports = {
             .leftJoinAndSelect('product.comments', 'comments')
             .leftJoinAndSelect('comments.customer', 'customer')
             .where('order.id = :orderId', {orderId: orderId})
-            .getOne().then((loadedOrder: CustomerOrder) => {
+            .getOne().then((loadedOrder: Order) => {
                 orderInstance = loadedOrder;
             });
 
         return orderInstance;
     },
 
-    async createOrder(connection: any, customerId: number, orders: { quantity: number, product: Product}[]) {
+    async createOrder(connection: any, customerId: number, orders: CompositeOrder[]) {
 
         const customerRepo = connection.getRepository(Customer);
-        const productRepo = connection.getRepository(Product);
         //const customerInstance: Customer;
-        let orderInstance: CustomerOrder;
+        //let orderInstance: Order;
 
-        const newOrder = this.createNewOrder(orders);
+        const orderList: Order[] = [];
 
-        this.createMerchantOrders(newOrder);
-
-        console.log(await this.getMerchantFromProduct(productRepo, newOrder.orderedProducts[0]));
-
-        const orderRepo = connection.getRepository(CustomerOrder);
-
-        await orderRepo.persist(newOrder).then((res: any) => {
-            orderInstance = res;
+        orders.forEach((order) => {
+            orderList.push(this.createNewOrder(order.order, order.merchantId));
         });
 
-        return orderInstance;
+        //const newOrder = this.createNewOrder(orders);
+
+        const persistedOrders: Order[] = [];
+        orderList.forEach((newOrder: Order) => {
+           this.saveOrder(newOrder, connection).then((res: any) => {
+               persistedOrders.push(res);
+           });
+        });
+        return persistedOrders;
+
+    },
+
+    async saveOrder(order: Order, connection: any) {
+        const orderRepo = connection.getRepository(Order);
+        await orderRepo.persist(order).then((res: any) => {
+            return res;
+        });
     },
 
     async loadCustomerById(connection: any, customerId: number) {
@@ -122,15 +132,17 @@ module.exports = {
     /////// ORDER FUNCTIONS
     /**
      * Create a new order object from order list
-     * @returns {CustomerOrder}
+     * @returns {Order}
      * @param orders
+     * @param merchantId
      */
-    createNewOrder(orders: { quantity: number, product: Product }[]): CustomerOrder {
-        const newOrder: CustomerOrder = new CustomerOrder();
+     createNewOrder(orders: OrderItem[], merchantId: number): Order {
+        const newOrder: Order = new Order();
         newOrder.name = 'Joe Flynn';
         newOrder.orderDate = new Date();
+        newOrder.merchantId = merchantId;
         newOrder.orderedProducts = [];
-        orders.forEach((order: { quantity: number, product: Product}) => {
+        orders.forEach((order: OrderItem) => {
             const orderedProduct: OrderedProduct = new OrderedProduct();
             orderedProduct.product = order.product;
             orderedProduct.price = order.product.price;
@@ -167,7 +179,7 @@ module.exports = {
         return merchantInstance;
     },
 
-    async createMerchantOrders(order: CustomerOrder) {
+    async createMerchantOrders(order: Order) {
 
     }
 };
