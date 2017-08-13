@@ -13,10 +13,10 @@ module.exports = {
         const connectionOptions: ConnectionOptions = {
             driver : {
                 type: 'mysql',
-                host: 'localhost',
-                port: 3306,
-                username: 'root',
-                password: 'password',
+                host: process.env.OPENSHIFT_MYSQL_DB_HOST || 'localhost',
+                port: process.env.OPENSHIFT_MYSQL_DB_PORT || 3306,
+                username: process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
+                password: process.env.OPENSHIFT_MYSQL_DB_PASSWORD || 'password',
                 database: 'testDB'
             },
             autoSchemaSync: true,
