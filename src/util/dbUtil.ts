@@ -17,7 +17,7 @@ module.exports = {
                 port: process.env.OPENSHIFT_MYSQL_DB_PORT || 3306,
                 username: process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
                 password: process.env.OPENSHIFT_MYSQL_DB_PASSWORD || 'password',
-                database: 'testDB'
+                database: 'afs'
             },
             autoSchemaSync: true,
             logging: {
