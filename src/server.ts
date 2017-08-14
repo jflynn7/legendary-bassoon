@@ -38,7 +38,7 @@ const app = express();
 /**
  * Express configuration.
  */
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 3001);
+app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3001);
 app.set('ip_address', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'pug');
