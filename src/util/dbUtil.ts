@@ -13,8 +13,9 @@ module.exports = {
         const connectionOptions: ConnectionOptions = {
             driver : {
                 type: 'mysql',
-                host: process.env.OPENSHIFT_MYSQL_DB_HOST || 'localhost',
-                port: process.env.OPENSHIFT_MYSQL_DB_PORT || 3306,
+                url: process.env.DATABASE_URL,
+                //host: process.env.OPENSHIFT_MYSQL_DB_HOST || 'localhost',
+                //port: process.env.OPENSHIFT_MYSQL_DB_PORT || 3306,
                 username: process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
                 password: process.env.OPENSHIFT_MYSQL_DB_PASSWORD || 'password',
                 database: 'afs'
