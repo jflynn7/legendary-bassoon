@@ -9,7 +9,7 @@
   "author": "Joe Flynn",
   "license": "MIT",
   "scripts": {
-    "start": "npm run build",
+    "start": "sh ./deploy_openshift.sh",
     "dev": "npm run build && npm run watch",
     "build": "npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets",
     "serve": "nodemon dist/server.js",
