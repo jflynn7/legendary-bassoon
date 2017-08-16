@@ -6,6 +6,10 @@ const db = require('../database-actions/customerActions');
 const dbUtil = require('../util/dbUtil');
 const handlers = require('../util/handlers');
 
+export let helloMoto = (req: Request, res: Response) => {
+    res.json('Hello, moto');
+};
+
 export let loadCustomer = (req: Request, res: Response) => {
     dbUtil.getConnection().then((connection: any) => {
         db.loadCustomerById(connection, req.params.customerId).then((customer: Customer) => {

@@ -8,17 +8,18 @@ import { Comment } from '../models/customer/Comment';
 import { OrderedProduct } from '../models/ordering/OrderedProduct';
 import { Order } from '../models/ordering/Order';
 
+const config = require('../util/config');
+
 module.exports = {
     getDatabaseConfig() {
         const connectionOptions: ConnectionOptions = {
             driver : {
                 type: 'mysql',
-                url: process.env.DATABASE_URL,
-                //host: process.env.OPENSHIFT_MYSQL_DB_HOST || 'localhost',
-                //port: process.env.OPENSHIFT_MYSQL_DB_PORT || 3306,
-                username: process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
-                password: process.env.OPENSHIFT_MYSQL_DB_PASSWORD || 'password',
-                database: 'afs'
+                host: config.get('MYSQL_HOST') || process.env.OPENSHIFT_MYSQL_DB_HOST || 'localhost',
+                port: config.get('MYSQL_PORT') || process.env.OPENSHIFT_MYSQL_DB_PORT || 3306,
+                username: config.get('MYSQL_USER') || process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
+                password: config.get('MYSQL_PASSWORD') || process.env.OPENSHIFT_MYSQL_DB_PASSWORD || 'password',
+                database: config.get('MYSQL_DB_NAME') || 'afs'
             },
             autoSchemaSync: true,
             logging: {
