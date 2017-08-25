@@ -44,8 +44,7 @@ const config = require('./util/config');
 /**
  * Express configuration.
  */
-app.set('port', config.get('PORT') || 3001);
-app.set('ip_address', config.get('IP_ADDRESS') || '127.0.0.1');
+app.set('port', (process.env.PORT || 5000));
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'pug');
 app.use(compression());
@@ -88,9 +87,9 @@ app.use(errorHandler());
 /**
  * Start Express server.
  */
-app.listen(app.get('port'), app.get('ip_address'), () => {
-  console.log((' App is running on port :%d in %s mode'), app.get('port'), app.get('env'));
-  console.log('  Press CTRL-C to stop\n');
+app.listen(app.get('port'), () => {
+  console.log(`App is running on port ${app.get('port')}`);
+
 });
 
 module.exports = app;

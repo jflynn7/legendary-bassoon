@@ -9,7 +9,7 @@
   "author": "Joe Flynn",
   "license": "MIT",
   "scripts": {
-    "start": "npm install typescript -g && npm run build",
+    "start": "npm run build && node app/dist/server.js",
     "dev": "npm run build && npm run watch",
     "build": "npm run build-sass && npm run build-ts && npm run copy-static-assets",
     "serve": "nodemon dist/server.js",

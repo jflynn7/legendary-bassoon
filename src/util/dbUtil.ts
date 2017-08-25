@@ -1,6 +1,6 @@
 import { Product } from '../models/merchant/Product';
 import { Merchant } from '../models/merchant/Merchant';
-import {ConnectionOptions, getConnectionManager} from 'typeorm';
+import { ConnectionOptions, getConnectionManager } from 'typeorm';
 import { createConnection } from 'typeorm';
 import { Supplier } from '../models/merchant/Supplier';
 import { Customer } from '../models/customer/Customer';
