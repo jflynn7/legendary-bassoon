@@ -15,10 +15,10 @@ module.exports = {
         const connectionOptions: ConnectionOptions = {
             driver : {
                 type: 'mysql',
-                host: config.get('MYSQL_HOST') || process.env.OPENSHIFT_MYSQL_DB_HOST || 'localhost',
-                port: config.get('MYSQL_PORT') || process.env.OPENSHIFT_MYSQL_DB_PORT || 3306,
-                username: config.get('MYSQL_USER') || process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
-                password: config.get('MYSQL_PASSWORD') || process.env.OPENSHIFT_MYSQL_DB_PASSWORD || 'password',
+                host: config.get('MYSQL_HOST') || 'localhost',
+                port: config.get('MYSQL_PORT') || 3306,
+                username: config.get('MYSQL_USER') || 'root',
+                password: config.get('MYSQL_PASSWORD') || 'password',
                 database: config.get('MYSQL_DB_NAME') || 'afs'
             },
             dropSchemaOnConnection: true,
