@@ -19,7 +19,7 @@ module.exports = {
                 port: config.get('MYSQL_PORT') || 3306,
                 username: config.get('MYSQL_USER') || 'root',
                 password: config.get('MYSQL_PASSWORD') || 'password',
-                database: config.get('MYSQL_DB_NAME') || 'afs'
+                database: config.get('MYSQL_DB_NAME') || 'testDB',
             },
             dropSchemaOnConnection: true,
             autoSchemaSync: true,
@@ -48,5 +48,11 @@ module.exports = {
         });
 
         return dbConnection;
+    },
+
+    createDatabases() {
+
     }
+
+
 };

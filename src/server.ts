@@ -8,7 +8,6 @@ import * as bodyParser from 'body-parser';
 import * as logger from 'morgan';
 import * as errorHandler from 'errorhandler';
 import * as lusca from 'lusca';
-import * as dotenv from 'dotenv';
 import * as flash from 'express-flash';
 import * as path from 'path';
 import expressValidator = require('express-validator');
@@ -89,7 +88,7 @@ app.use(errorHandler());
  */
 app.listen(app.get('port'), () => {
   console.log(`App is running on port ${app.get('port')}`);
-
+  dbUtil.createDatabases();
 });
 
 module.exports = app;

@@ -26,17 +26,17 @@ nconf
         // configure the appropriate settings for each storage engine below.
         // If you are unsure, use datastore as it requires no additional
         // configuration.
-        DATA_BACKEND: 'datastore',
-
-        // This is the id of your project in the Google Cloud Developers Console.
-        GCLOUD_PROJECT: 'afs-engine',
-
-        // MongoDB connection string
-        // https://docs.mongodb.org/manual/reference/connection-string/
-        MONGO_URL: 'mongodb://localhost:27017',
-        MONGO_COLLECTION: 'books',
-
-        MYSQL_DB_NAME: 'awsafs',
+        //DATA_BACKEND: 'datastore',
+        //
+        //// This is the id of your project in the Google Cloud Developers Console.
+        //GCLOUD_PROJECT: 'afs-engine',
+        //
+        //// MongoDB connection string
+        //// https://docs.mongodb.org/manual/reference/connection-string/
+        //MONGO_URL: 'mongodb://localhost:27017',
+        //MONGO_COLLECTION: 'books',
+        //
+        MYSQL_DB_NAME: 'testDB',
         MYSQL_HOST: 'aws-db.cidisb0qgnbu.us-east-1.rds.amazonaws.com',
         MYSQL_PORT: '3306',
         MYSQL_USER: 'username',
@@ -62,6 +62,6 @@ if (nconf.get('DATA_BACKEND') === 'cloudsql') {
 
 function checkConfig (setting) {
     if (!nconf.get(setting)) {
-        throw new Error(`You must set ${setting} as an environment variable or in config.json!`);
+        console.warn(`You must set ${setting} as an environment variable or in config.json!`);
     }
 }
