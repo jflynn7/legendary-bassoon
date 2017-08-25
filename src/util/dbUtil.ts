@@ -37,12 +37,14 @@ module.exports = {
         const connectionManager = getConnectionManager();
 
         if (connectionManager.has('default')) {
+            console.log(connectionManager);
             return connectionManager.get('default');
         }
 
         let dbConnection;
         await createConnection(this.getDatabaseConfig()).then(connection => {
             dbConnection = connection;
+            console.log(dbConnection);
         });
 
         return dbConnection;
