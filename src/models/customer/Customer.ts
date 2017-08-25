@@ -4,7 +4,7 @@ import { Comment } from './Comment';
 
 @Entity()
 export class Customer {
-
+iupcf
     @PrimaryGeneratedColumn()
     id: number;
 

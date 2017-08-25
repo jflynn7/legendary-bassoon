@@ -36,11 +36,11 @@ nconf
         MONGO_URL: 'mongodb://localhost:27017',
         MONGO_COLLECTION: 'books',
 
-        MYSQL_DB_NAME: 'heroku-db',
-        MYSQL_HOST: '192.186.253.160',
+        MYSQL_DB_NAME: 'awsafs',
+        MYSQL_HOST: 'aws-db.cidisb0qgnbu.us-east-1.rds.amazonaws.com',
         MYSQL_PORT: '3306',
-        MYSQL_USER: 'heroku',
-        MYSQL_PASSWORD: 'heroku',
+        MYSQL_USER: 'username',
+        MYSQL_PASSWORD: 'password',
 
         PORT: 3000,
         IP_ADDRESS: 'localhost',

@@ -33,10 +33,8 @@ module.exports = {
     },
 
     async removeComment(connection: any, commentId: number) {
-        console.log(commentId);
         const commentRepo = connection.getRepository(Comment);
         commentRepo.findOneById(commentId).then((comment: Comment) => {
-            console.log(comment);
             commentRepo.remove(comment).then(() => {
                 console.log('REMOVED');
                 return true;
