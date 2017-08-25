@@ -21,8 +21,7 @@ module.exports = {
                 password: config.get('MYSQL_PASSWORD') || 'password',
                 database: config.get('MYSQL_DB_NAME') || 'testDB',
             },
-            dropSchemaOnConnection: true,
-            autoSchemaSync: true,
+            autoSchemaSync: !config.get('PROD_MODE'),
             logging: {
                 logQueries: true,
                 logSchemaCreation: true,
