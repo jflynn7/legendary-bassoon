@@ -21,9 +21,11 @@ module.exports = {
                 password: config.get('MYSQL_PASSWORD') || process.env.OPENSHIFT_MYSQL_DB_PASSWORD || 'password',
                 database: config.get('MYSQL_DB_NAME') || 'afs'
             },
+            dropSchemaOnConnection: true,
             autoSchemaSync: true,
             logging: {
                 logQueries: true,
+                logSchemaCreation: true,
             },
             entities: [Merchant, Product, Supplier, Customer, Comment, Order, OrderedProduct],
         };
