@@ -8,40 +8,25 @@ nconf
     .argv()
     // 2. Environment variables
     .env([
-        'DATA_BACKEND',
-        'GCLOUD_PROJECT',
-        'INSTANCE_CONNECTION_NAME',
-        'MONGO_URL',
-        'MONGO_COLLECTION',
+        'MYSQL_DB_NAME',
+        'MYSQL_HOST',
         'MYSQL_USER',
         'MYSQL_PASSWORD',
+        'PROD_MODE',
         'NODE_ENV',
-        'PORT'
+        'PORT',
+        'IP_ADDRESS'
     ])
     // 3. Config file
     .file({ file: path.join(__dirname, 'config.json') })
     // 4. Defaults
     .defaults({
-        // dataBackend can be 'datastore', 'cloudsql', or 'mongodb'. Be sure to
-        // configure the appropriate settings for each storage engine below.
-        // If you are unsure, use datastore as it requires no additional
-        // configuration.
-        //DATA_BACKEND: 'datastore',
-        //
-        //// This is the id of your project in the Google Cloud Developers Console.
-        //GCLOUD_PROJECT: 'afs-engine',
-        //
-        //// MongoDB connection string
-        //// https://docs.mongodb.org/manual/reference/connection-string/
-        //MONGO_URL: 'mongodb://localhost:27017',
-        //MONGO_COLLECTION: 'books',
-        //
-        MYSQL_DB_NAME: 'testDB',
-        MYSQL_HOST: 'aws-db.cidisb0qgnbu.us-east-1.rds.amazonaws.com',
-        MYSQL_PORT: '3306',
-        MYSQL_USER: 'username',
-        MYSQL_PASSWORD: 'password',
-        PROD_MODE: true,
+        //MYSQL_DB_NAME: 'testDB',
+        //MYSQL_HOST: 'aws-db.cidisb0qgnbu.us-east-1.rds.amazonaws.com',
+        //MYSQL_PORT: '3306',
+        //MYSQL_USER: 'username',
+        //MYSQL_PASSWORD: 'password',
+        PROD_MODE: false,
         PORT: 3000,
         IP_ADDRESS: 'localhost',
     });

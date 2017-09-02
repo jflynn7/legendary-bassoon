@@ -6,3 +6,4 @@
 .env.example
 .travis.yml
 dist/
+app
